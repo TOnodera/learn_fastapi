@@ -6,6 +6,11 @@ services:
             - TZ=${TZ}
             - LC_ALL=${LC_ALL}
             - LANG=${LANG}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - DB_PORT=${DB_PORT}
         volumes: 
             - ./:/home/python/workspace
     mysql:
