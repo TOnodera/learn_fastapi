@@ -49,6 +49,6 @@ async def users_update(user: UserUpdate, database: Database = Depends(get_connec
 
 @router.post("/users/delete")
 async def users_delete(user: UserUpdate, database: Database = Depends(get_connection)):
-    query = users.delete().where(users.column.id == user.id)
+    query = users.delete().where(users.columns.id == user.id)
     await database.execute(query)
     return {"result": "delete success"}
