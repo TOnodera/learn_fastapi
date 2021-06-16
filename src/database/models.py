@@ -27,10 +27,10 @@ class Article(Base):
                         default=datetime.now, nullable=False)
 
 
-def main(args):
+def create(args):
     Base.metadata.create_all(bind=ENGINE)
     Base.metadata.create_all(bind=TEST_ENGINE)
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    create(sys.argv)
