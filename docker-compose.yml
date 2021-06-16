@@ -6,11 +6,17 @@ services:
             - TZ=${TZ}
             - LC_ALL=${LC_ALL}
             - LANG=${LANG}
+            #データベースの環境変数
             - MYSQL_DATABASE=${MYSQL_DATABASE}
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-            - DB_PORT=${DB_PORT}
+            - MYSQL_PORT=${MYSQL_PORT}
+            #テスト用データベースの環境変数
+            - MYSQL_DATABASE_TEST=${MYSQL_DATABASE_TEST}
+            - MYSQL_ROOT_PASSWORD_TEST=${MYSQL_ROOT_PASSWORD_TEST}
+            - MYSQL_USER_TEST=${MYSQL_USER_TEST}
+            - MYSQL_PASSWORD_TEST=${MYSQL_PASSWORD_TEST}
         volumes: 
             - ./:/home/python/workspace
     mysql:
@@ -18,12 +24,25 @@ services:
         volumes:
             - db-store:/var/lib/mysql
         ports:
-            - ${DB_PORT}:3306
+            - ${MYSQL_PORT}:3306
         environment:
             - MYSQL_DATABASE=${MYSQL_DATABASE}
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_PORT=${MYSQL_PORT}
+            - TZ=${TZ}
+    mysql_test:
+        build: ./docker/mysql
+        volumes:
+            - db-store:/var/lib/mysql_test
+        ports:
+            - ${MYSQL_PORT_TEST}:3306
+        environment:
+            - MYSQL_DATABASE=${MYSQL_DATABASE_TEST}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD_TEST}
+            - MYSQL_USER=${MYSQL_USER_TEST}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD_TEST}
             - TZ=${TZ}
 volumes:
     db-store:
