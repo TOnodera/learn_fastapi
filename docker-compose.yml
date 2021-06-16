@@ -1,0 +1,25 @@
+version: '3'
+services: 
+    app:
+        build: ./docker/python
+        environment:
+            - TZ=${TZ}
+            - LC_ALL=${LC_ALL}
+            - LANG=${LANG}
+        volumes: 
+            - ./:/home/python/workspace
+    mysql:
+        build: ./docker/mysql
+        volumes:
+            - db-store:/var/lib/mysql
+        ports:
+            - ${DB_PORT}:3306
+        environment:
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - TZ=${TZ}
+volumes:
+    db-store:
+            
