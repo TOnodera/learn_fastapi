@@ -7,7 +7,7 @@ DATABASE = 'mysql://%s:%s@%s:%s/%s' % (
     os.environ['MYSQL_USER'],
     os.environ['MYSQL_PASSWORD'],
     'mysql',
-    os.environ['DB_PORT'],
+    os.environ['MYSQL_PORT'],
     os.environ['MYSQL_DATABASE']
 )
 
@@ -19,3 +19,20 @@ session = scoped_session(
 
 Base = declarative_base()
 Base.query = session.query_property()
+
+# テスト用データベース
+TEST_DATABASE = 'mysql://%s:%s@%s:%s/%s' % (
+    os.environ['MYSQL_USER_TEST'],
+    os.environ['MYSQL_PASSWORD_TEST'],
+    'mysql_test',
+    os.environ['MYSQL_PORT'],
+    os.environ['MYSQL_DATABASE_TEST']
+)
+
+print(TEST_DATABASE)
+
+TEST_ENGINE = create_engine(TEST_DATABASE, encoding="utf-8", echo=True)
+
+TEST_session = scoped_session(
+    sessionmaker(autocommit=False, autoflush=False, bind=TEST_ENGINE)
+)

@@ -1,8 +1,7 @@
 import sys
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, DateTime, Text
-from config import Base
-from config import ENGINE
+from config import Base, ENGINE, TEST_ENGINE
 from datetime import datetime
 
 
@@ -30,6 +29,7 @@ class Article(Base):
 
 def main(args):
     Base.metadata.create_all(bind=ENGINE)
+    Base.metadata.create_all(bind=TEST_ENGINE)
 
 
 if __name__ == "__main__":
