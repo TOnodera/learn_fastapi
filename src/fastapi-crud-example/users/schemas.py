@@ -18,7 +18,7 @@ class UserUpdate(BaseModel):
     is_superuser: str
 
 
-class UserSecret(BaseModel):
+class UserSelect(BaseModel):
     username: str
     email: str
     is_active: bool
