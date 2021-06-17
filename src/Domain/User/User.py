@@ -2,6 +2,9 @@ from route.route import UserCreate, UserSelect
 from typing import List
 from .CreateUser import CreateUser
 from Domain.Repository.User import User as UserRepository
+from Domain.User.CreateValidator import CreateValidator
+import re
+from .CreateValidator import CreateValidator
 
 
 class User:
@@ -16,5 +19,6 @@ class User:
         return userList
 
     def create(self, user: UserCreate) -> int:
+        CreateValidator.validate(user)
         creator = CreateUser(user)
         return creator.create()

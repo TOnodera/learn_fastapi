@@ -1,9 +1,10 @@
 from fastapi import APIRouter
 from typing import List
 from .schema import UserSelect, UserCreate
-from database.config import connection
 from database.models import User
 from Domain.User.User import User as UserDomain
+from Domain.Exception.DomainException import DomainException
+from Domain.Exception.ExceptionHandler import ExceptionHandler
 
 router = APIRouter()
 domain = UserDomain()
@@ -16,6 +17,9 @@ def all():
 
 @router.post('/users/create', response_model=UserSelect)
 def create(user: UserCreate):
-    id = domain.create(user)
-    orm = User()
-    return orm.query.get(id).toDict()
+    try:
+        id = domain.create(user)
+        orm = User()
+        return orm.query.get(id).toDict()
+    except DomainException as e:
+        ExceptionHandler.handle(e)
