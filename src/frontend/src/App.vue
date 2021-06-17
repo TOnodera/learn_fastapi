@@ -1,23 +1,15 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
+    <v-app-bar app color="primary" dark>
       <header>
-      <v-app-bar
-        app
-        color="primary"
-        dark
-      >
-        <v-toolbar-title>Fast Posting</v-toolbar-title>
-      </v-app-bar>
-    </header>
+        <v-app-bar app color="primary" dark>
+          <v-toolbar-title>Fast Posting</v-toolbar-title>
+        </v-app-bar>
+      </header>
     </v-app-bar>
 
     <v-main>
-      <layout/>
+      <layout />
     </v-main>
   </v-app>
 </template>
