@@ -1,4 +1,4 @@
-from route.route import UserCreate, UserSelect
+from route.user import UserCreate, UserSelect
 from typing import List
 from .CreateUser import CreateUser
 from Domain.Repository.User import User as UserRepository

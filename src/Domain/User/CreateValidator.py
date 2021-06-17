@@ -1,5 +1,5 @@
 from Domain.Exception.DomainException import DomainException
-from route.route import UserCreate
+from route.user import UserCreate
 from .UserValidator import UserValidator
 import re
 
