@@ -3,22 +3,19 @@ from typing import List
 from .schema import UserSelect, UserCreate
 from database.config import connection
 from database.models import User
+from Domain.User.User import User as UserDomain
 
 router = APIRouter()
+domain = UserDomain()
 
 
 @router.get('/users', response_model=List[UserSelect])
 def all():
-    users = connection.query(User).all()
-    userList = []
-    for user in users:
-        userList.append(user.toDict())
-    return userList
+    return domain.all()
 
 
 @router.post('/users/create', response_model=UserSelect)
 def create(user: UserCreate):
-    userOrm = User()
-    userOrm.name = user.name
-    userOrm.email = user.email
-    connection.add(userOrm)
+    id = domain.create(user)
+    orm = User()
+    return orm.query.get(id).toDict()
