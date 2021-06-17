@@ -3,8 +3,8 @@
     <template v-slot:default>
       <thead>
         <tr>
-          <th class="text-left">Name</th>
-          <th class="text-left">Calories</th>
+          <th class="text-left">名前</th>
+          <th class="text-left">メールアドレス</th>
         </tr>
       </thead>
       <tbody>
@@ -16,3 +16,13 @@
     </template>
   </v-simple-table>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      items: [],
+    };
+  },
+};
+</script>

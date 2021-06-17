@@ -53,7 +53,8 @@
 		"ms-python.python",
 		"mhutchie.git-graph",
 		"dbaeumer.vscode-eslint",
-		"esbenp.prettier-vscode"
+		"esbenp.prettier-vscode",
+		"hollowtree.vue-snippets"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
