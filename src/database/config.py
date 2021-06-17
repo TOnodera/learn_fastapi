@@ -13,12 +13,13 @@ DATABASE = 'mysql://%s:%s@%s:%s/%s' % (
 
 ENGINE = create_engine(DATABASE, encoding="utf-8", echo=True)
 
-session = scoped_session(
+connection = scoped_session(
     sessionmaker(autocommit=False, autoflush=False, bind=ENGINE)
 )
 
 Base = declarative_base()
-Base.query = session.query_property()
+Base.query = connection.query_property()
+
 
 # テスト用データベース
 TEST_DATABASE = 'mysql://%s:%s@%s:%s/%s' % (
@@ -29,10 +30,9 @@ TEST_DATABASE = 'mysql://%s:%s@%s:%s/%s' % (
     os.environ['MYSQL_DATABASE_TEST']
 )
 
-print(TEST_DATABASE)
 
 TEST_ENGINE = create_engine(TEST_DATABASE, encoding="utf-8", echo=True)
 
-TEST_session = scoped_session(
+TEST_connection = scoped_session(
     sessionmaker(autocommit=False, autoflush=False, bind=TEST_ENGINE)
 )
