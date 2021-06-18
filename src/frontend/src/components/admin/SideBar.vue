@@ -14,7 +14,7 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <router-link to="/">
+          <router-link :to="item.to">
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </router-link>
         </v-list-item-content>
@@ -28,8 +28,8 @@ export default {
   data() {
     return {
       items: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-        { title: 'User', icon: 'fas fa-male' },
+        { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/admin' },
+        { title: 'User', icon: 'fas fa-male', to: '/admin/user' },
       ],
       right: null,
     };
