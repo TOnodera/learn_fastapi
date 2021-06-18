@@ -14,7 +14,9 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <router-link to="/">
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </router-link>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -27,8 +29,7 @@ export default {
     return {
       items: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-        { title: 'Photos', icon: 'mdi-image' },
-        { title: 'About', icon: 'mdi-help-box' },
+        { title: 'User', icon: 'fas fa-male' },
       ],
       right: null,
     };

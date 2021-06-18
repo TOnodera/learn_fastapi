@@ -1,3 +1,4 @@
+import './assets/scss/myreset.scss';
 import Vue from 'vue';
 import Admin from './Admin.vue';
 import vuetify from './plugins/vuetify';
