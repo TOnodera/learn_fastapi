@@ -1,6 +1,4 @@
 <template>
-  <!-- App.vue -->
-
   <v-app>
     <admin-nav />
     <side-bar />
