@@ -2,11 +2,8 @@
   <!-- App.vue -->
 
   <v-app>
+    <admin-nav />
     <side-bar />
-
-    <v-app-bar app>
-      <v-icon>fas fa-arrow-right</v-icon>
-    </v-app-bar>
     <v-main>
       <v-container fluid>
         <router-view></router-view>
@@ -21,10 +18,12 @@
 
 <script>
 import SideBar from './components/admin/SideBar';
+import AdminNav from './components/admin/AdminNav';
 export default {
   name: 'Admin',
   components: {
     SideBar,
+    AdminNav,
   },
 };
 </script>
