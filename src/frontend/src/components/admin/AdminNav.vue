@@ -1,5 +1,6 @@
 <template>
   <v-app-bar class="nav" app>
+    <v-app-bar-nav-icon @click="hambergerClickedEmitter"></v-app-bar-nav-icon>
     <div class="icon-wrapper">
       <p class="icon"><v-icon>fas fa-arrow-right</v-icon></p>
       <p class="text" @click="toTopPage">サイトを見る</p>
@@ -13,6 +14,9 @@ export default {
   methods: {
     toTopPage() {
       window.open('/', '_blank');
+    },
+    hambergerClickedEmitter() {
+      this.$emit('hamberger-click');
     },
   },
 };

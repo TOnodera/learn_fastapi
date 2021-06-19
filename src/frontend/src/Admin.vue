@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <admin-nav />
-    <side-bar />
+    <admin-nav @hamberger-click="hambergerClicked" />
+    <side-bar :hamberger-toggle="hambergerToggle" />
     <v-main>
       <v-container fluid>
         <router-view></router-view>
@@ -22,6 +22,16 @@ export default {
   components: {
     SideBar,
     AdminNav,
+  },
+  data() {
+    return {
+      hambergerToggle: false,
+    };
+  },
+  methods: {
+    hambergerClicked: function () {
+      this.hambergerToggle = !this.hambergerToggle;
+    },
   },
 };
 </script>

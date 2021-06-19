@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app>
+  <v-navigation-drawer v-model="drawer" app>
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="text-h6"> FastApi Admin </v-list-item-title>
@@ -31,8 +31,19 @@ export default {
         { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/admin' },
         { title: 'User', icon: 'fas fa-male', to: '/admin/user' },
       ],
-      right: null,
+      drawer: false,
     };
+  },
+  props: {
+    hambergerToggle: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  watch: {
+    hambergerToggle: function () {
+      this.drawer = this.hambergerToggle;
+    },
   },
 };
 </script>
