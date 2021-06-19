@@ -29,12 +29,32 @@
 		"python.jediEnabled": false,
 		"[python]": {
 			"editor.formatOnSave" : true
-		}
+		},
+		"eslint.validate": [
+			"javascript",
+			"vue"
+		  ],
+		"vetur.validation.template": false,
+		"[javascript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[vue]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+		},
+		// ファイル保存時にコードフォーマッターが実行される。
+		"editor.formatOnSave": true,
+		// ファイル保存時にESLIntが実行される。
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true,
+		},
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
-		"mhutchie.git-graph"
+		"mhutchie.git-graph",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"hollowtree.vue-snippets"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
