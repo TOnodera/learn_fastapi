@@ -21,8 +21,9 @@ export default {
       href += `/${value}`;
       this.items.push({
         text: value,
-        disabled: index === paths.length - 1,
-        href: href,
+        exact: true,
+        link: index === paths.length - 1 || true,
+        to: href,
       });
     });
   },
