@@ -2,11 +2,7 @@
   <div class="base-template">
     <template>
       <slot name="header">
-        <v-breadcrumbs :items="items">
-          <template v-slot:divider>
-            <v-icon>mdi-chevron-right</v-icon>
-          </template>
-        </v-breadcrumbs>
+        <breadcrumbs />
       </slot>
     </template>
     <template>
@@ -16,7 +12,11 @@
 </template>
 
 <script>
+import Breadcrumbs from '@/components/admin/Breadcrumbs';
 export default {
+  components: {
+    Breadcrumbs,
+  },
   data: () => ({
     items: [
       {
