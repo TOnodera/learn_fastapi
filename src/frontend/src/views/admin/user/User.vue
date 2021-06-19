@@ -1,7 +1,9 @@
 <template>
   <div>
     <base-contents>
-      <template #header></template>
+      <template #header>
+        <breadcrumbs />
+      </template>
       <template #contents></template>
     </base-contents>
   </div>
@@ -9,10 +11,12 @@
 
 <script>
 import BaseContents from '@/components/admin/BaseContents';
+import Breadcrumbs from '@/components/admin/Breadcrumbs';
 export default {
   name: 'User',
   components: {
     BaseContents,
+    Breadcrumbs,
   },
 };
 </script>

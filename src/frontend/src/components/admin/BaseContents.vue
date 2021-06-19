@@ -10,14 +10,7 @@
       </slot>
     </template>
     <template>
-      <slot name="contents">
-        <v-data-table
-          :headers="headers"
-          :items="desserts"
-          :items-per-page="5"
-          class="elevation-1"
-        ></v-data-table
-      ></slot>
+      <slot name="contents"></slot>
     </template>
   </div>
 </template>
@@ -143,5 +136,6 @@ export default {
 
 <style lang="scss">
 .base-template {
+  margin: 100px;
 }
 </style>
