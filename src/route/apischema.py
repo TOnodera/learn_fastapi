@@ -17,3 +17,11 @@ class ApiUserCreate(BaseModel):
     email: str
     memo: str
     image: str
+
+
+class ApiUserUpdate(BaseModel):
+    id: int
+    name: str
+    email: str
+    memo: str
+    image: str
