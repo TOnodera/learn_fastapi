@@ -1,15 +1,22 @@
 from database.models import User as UserModel
-from database.config import connection
+from Domain.Repository.Repository import Repository
+from route.user import UserCreate
 
 
-class User:
+class User(Repository):
+
+    def __init__(self):
+        super().__init__()
+
     def all(self):
-        return connection.query(UserModel).all()
+        return self.connection.query(UserModel).all()
 
-    def create(self, name: str, email: str):
+    def create(self, user: UserCreate):
         orm = UserModel()
-        orm.name = name
-        orm.email = email
-        connection.add(orm)
-        connection.commit()
+        orm.name = user.name
+        orm.email = user.email
+        orm.memo = user.memo
+        orm.image = user.image
+        self.connection.add(orm)
+        self.connection.commit()
         return orm.id

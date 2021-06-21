@@ -6,6 +6,8 @@ class UserSelect(BaseModel):
     id: int
     name: str
     email: str
+    memo: str
+    image: str
     created_at: datetime
     updated_at: datetime
 
@@ -13,3 +15,5 @@ class UserSelect(BaseModel):
 class UserCreate(BaseModel):
     name: str
     email: str
+    memo: str
+    image: str
