@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from typing import List
-from .apischema import ApiUserSelect, ApiUserCreate, ApiUserUpdate
+from route.apischema import ApiUserSelect, ApiUserCreate, ApiUserUpdate
 from database.models import User
 from Domain.User.User import User as UserDomain
 from Domain.Exception.DomainException import DomainException
@@ -29,5 +29,6 @@ def update(user: ApiUserUpdate, domain: UserDomain = Depends(get_user)):
 async def create(user: ApiUserCreate, domain: UserDomain = Depends(get_user)):
     try:
         id = await domain.create(user)
+
     except DomainException as e:
         ExceptionHandler.handle(e)
