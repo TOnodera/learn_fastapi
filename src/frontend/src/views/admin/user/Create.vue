@@ -4,25 +4,33 @@
       <template #header></template>
       <template #contents>
         <template>
-          <v-form ref="form" v-model="valid" lazy-validation>
+          <v-form ref="form" v-model="valid">
             <v-text-field
-              v-model="name"
+              v-model="user.name"
               :counter="10"
-              :rules="nameRules"
+              :rules="[nameRules.required, nameRules.length]"
               label="名前"
               required
             ></v-text-field>
 
             <v-text-field
-              v-model="email"
-              :rules="emailRules"
+              v-model="user.email"
+              :rules="[emailRules.required, emailRules.validEmail]"
               label="E-mail"
               required
             ></v-text-field>
 
-            <!--<v-textarea name="input-7-1" filled label="メモ" auto-grow v-model="memo"></v-textarea>-->
+            <v-textarea
+              name="input-7-1"
+              filled
+              label="メモ"
+              auto-grow
+              v-model="user.memo"
+            ></v-textarea>
 
-            <v-btn color="primary" depressed elevation="2" @click="send">送信</v-btn>
+            <v-btn :disabled="!valid" color="primary" depressed elevation="2" @click="send"
+              >送信</v-btn
+            >
           </v-form>
         </template>
       </template>
@@ -40,14 +48,32 @@ export default {
   },
   data() {
     return {
-      name: '',
-      email: '',
+      user: {
+        name: '',
+        email: '',
+        memo: '',
+        image: '',
+      },
+      valid: false,
+      nameRules: {
+        required: (v) => !!v || '名前を入力して下さい。',
+        length: (v) =>
+          (2 <= v.length && v.length <= 100) || '２文字以上１００文字以内で入力して下さい。',
+      },
+      emailRules: {
+        required: (v) => !!v || 'メールアドレスを入力して下さい。',
+        validEmail: (email) => {
+          const regex = /^.+[^.]@.+\..+$/;
+          return regex.test(email) || '正しい形式のメールアドレスを登録して下さい。';
+        },
+      },
     };
   },
   methods: {
     async send() {
       const user = new User();
-      await user.create(this.name, this.email);
+      const data = await user.create(this.user);
+      console.log(`送信完${data}`);
     },
   },
 };

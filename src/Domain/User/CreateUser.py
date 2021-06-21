@@ -8,5 +8,5 @@ class CreateUser:
         self.user = user
         self.repository = UserRepository()
 
-    def create(self) -> int:
-        return self.repository.create(self.user)
+    async def create(self) -> int:
+        return await self.repository.create(self.user)
