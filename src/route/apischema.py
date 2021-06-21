@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 
-class UserSelect(BaseModel):
+class ApiUserSelect(BaseModel):
     id: int
     name: str
     email: str

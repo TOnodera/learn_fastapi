@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from typing import List
-from .apischema import UserSelect, ApiUserCreate
+from .apischema import ApiUserSelect, ApiUserCreate
 from database.models import User
 from Domain.User.User import User as UserDomain
 from Domain.Exception.DomainException import DomainException
@@ -10,12 +10,12 @@ router = APIRouter()
 domain = UserDomain()
 
 
-@router.get('/users', response_model=List[UserSelect])
+@router.get('/users', response_model=List[ApiUserSelect])
 def all():
     return domain.all()
 
 
-@router.post('/users/create', response_model=UserSelect)
+@router.post('/users/create', response_model=ApiUserSelect)
 def create(user: ApiUserCreate):
     try:
         id = domain.create(user)

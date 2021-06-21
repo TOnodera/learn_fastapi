@@ -1,4 +1,4 @@
-from route.user import ApiUserCreate, UserSelect
+from route.user import ApiUserCreate, ApiUserSelect
 from typing import List
 from .CreateUser import CreateUser
 from Domain.Repository.User import User as UserRepository
@@ -11,7 +11,7 @@ class User:
     def __init__(self):
         self.repository = UserRepository()
 
-    def all(self) -> List[UserSelect]:
+    def all(self) -> List[ApiUserSelect]:
         users = self.repository.all()
         userList = list()
         for user in users:
