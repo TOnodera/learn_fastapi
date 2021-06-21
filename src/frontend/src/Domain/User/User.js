@@ -1,12 +1,24 @@
 import http from '@/Domain/Utility/http';
-import UserCreate from './UserCreate';
 
 class User {
   async create(user) {
-    const creator = new UserCreate(user);
-    await creator.create();
+    const response = await http.post('/users/create', {
+      name: user.name,
+      email: user.email,
+      memo: user.memo,
+      image: user.image,
+    });
+    return response.data;
   }
-  async update() {}
+  async update(user) {
+    const response = await http.put(`/users/${user.id}`, {
+      name: user.name,
+      email: user.email,
+      memo: user.memo,
+      image: user.image,
+    });
+    return response.data;
+  }
   async all() {
     const response = await http.get('/users');
     return response.data;
