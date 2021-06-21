@@ -22,3 +22,7 @@ class User:
         CreateValidator.validate(user)
         creator = CreateUser(user)
         return creator.create()
+
+    def get(self, user_id: int) -> ApiUserSelect:
+        result: ApiUserSelect = self.repository.get(user_id)
+        return result.toDict()

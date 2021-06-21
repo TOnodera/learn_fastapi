@@ -11,6 +11,9 @@ class User(Repository):
     def all(self):
         return self.connection.query(UserModel).all()
 
+    def get(self, user_id: int):
+        return self.connection.query(UserModel).get(user_id)
+
     def create(self, user: ApiUserCreate):
         orm = UserModel()
         orm.name = user.name

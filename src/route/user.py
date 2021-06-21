@@ -15,6 +15,11 @@ def all():
     return domain.all()
 
 
+@router.get('/users/{user_id}', response_model=ApiUserSelect)
+def get(user_id: int):
+    return domain.get(user_id)
+
+
 @router.put('/users/{user_id}', response_model=ApiUserSelect)
 def update(user: ApiUserUpdate):
     print(user)
