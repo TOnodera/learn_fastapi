@@ -1,6 +1,6 @@
-from database.config import connection
+from database.dbschema import database
 
 
 class Repository:
     def __init__(self):
-        self.connection = connection
+        self.database = database

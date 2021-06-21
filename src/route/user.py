@@ -11,13 +11,13 @@ domain = UserDomain()
 
 
 @router.get('/users', response_model=List[ApiUserSelect])
-def all():
-    return domain.all()
+async def all():
+    return await domain.all()
 
 
 @router.get('/users/{user_id}', response_model=ApiUserSelect)
-def get(user_id: int):
-    return domain.get(user_id)
+async def get(user_id: int):
+    return await domain.get(user_id)
 
 
 @router.put('/users/{user_id}', response_model=ApiUserSelect)
@@ -26,10 +26,10 @@ def update(user: ApiUserUpdate):
 
 
 @router.post('/users/create', response_model=ApiUserSelect)
-def create(user: ApiUserCreate):
+async def create(user: ApiUserCreate):
     try:
-        id = domain.create(user)
-        orm = User()
-        return orm.query.get(id).toDict()
+        id = await domain.create(user)
+
+        print(id)
     except DomainException as e:
         ExceptionHandler.handle(e)
