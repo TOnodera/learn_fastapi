@@ -4,18 +4,18 @@
       <template #header></template>
       <template #contents>
         <template>
-          <v-form ref="form" v-model="valid" lazy-validation>
+          <v-form ref="form" v-model="valid">
             <v-text-field
               v-model="user.name"
               :counter="10"
-              :rules="nameRules"
+              :rules="[nameRules.required, nameRules.length]"
               label="名前"
               required
             ></v-text-field>
 
             <v-text-field
               v-model="user.email"
-              :rules="emailRules"
+              :rules="[emailRules.required, emailRules.validEmail]"
               label="E-mail"
               required
             ></v-text-field>
@@ -28,7 +28,9 @@
               v-model="user.memo"
             ></v-textarea>
 
-            <v-btn color="primary" depressed elevation="2" @click="send">送信</v-btn>
+            <v-btn :disabled="!valid" color="primary" depressed elevation="2" @click="send"
+              >送信</v-btn
+            >
           </v-form>
         </template>
       </template>
@@ -51,6 +53,19 @@ export default {
         email: '',
         memo: '',
         image: '',
+      },
+      valid: false,
+      nameRules: {
+        required: (v) => !!v || '名前を入力して下さい。',
+        length: (v) =>
+          (2 <= v.length && v.length <= 100) || '２文字以上１００文字以内で入力して下さい。',
+      },
+      emailRules: {
+        required: (v) => !!v || 'メールアドレスを入力して下さい。',
+        validEmail: (email) => {
+          const regex = /^.+[^.]@.+\..+$/;
+          return regex.test(email) || '正しい形式のメールアドレスを登録して下さい。';
+        },
       },
     };
   },
