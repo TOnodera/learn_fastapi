@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from route.user import router
 from fastapi.middleware.cors import CORSMiddleware
-from database.dbschema import database
 
 app = FastAPI()
 
@@ -18,13 +17,3 @@ app.add_middleware(
 )
 
 app.include_router(router)
-
-
-@app.on_event("startup")
-async def startup():
-    await database.connect()
-
-
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()

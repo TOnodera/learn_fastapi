@@ -4,11 +4,12 @@ from .CreateUser import CreateUser
 from Domain.Repository.User import User as UserRepository
 from Domain.User.CreateValidator import CreateValidator
 from .CreateValidator import CreateValidator
+from sqlalchemy.orm import Session
 
 
 class User:
-    def __init__(self):
-        self.repository = UserRepository()
+    def __init__(self, db_session: Session):
+        self.repository = UserRepository(db_session)
 
     async def all(self) -> List[ApiUserSelect]:
         users = await self.repository.all()

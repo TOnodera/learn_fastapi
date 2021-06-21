@@ -1,33 +1,24 @@
-from database.models import User as UserModel
-from Domain.Repository.Repository import Repository
-from database.dbschema import users
+from database.models import User as UserDb
 from route.user import ApiUserCreate
-from datetime import datetime
+from sqlalchemy.future import select
+from sqlalchemy.orm import Session
 
 
-class User(Repository):
+class User:
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, db_session: Session):
+        self.db_session = db_session
 
     async def all(self):
-        query = users.select()
-        return await self.database.fetch_all(query)
+        query = await self.db_session.execute(select(UserDb)
+                                              .order_by(UserDb.updated_at))
+        return query.scalars().all()
 
     async def get(self, user_id: int):
-        query = users.select().where(users.c.id == user_id)
-        result = await self.database.execute(query)
-        for r in result:
-            print(r)
+        return self.db_session.execute(select(UserDb).where(UserDb.id == user_id))
 
-    async def create(self, user: ApiUserCreate):
-        insert = users.insert()
-        id = await self.database.execute(insert, {
-            "name": user.name,
-            "email": user.email,
-            "memo": user.memo,
-            "image": user.image,
-            "created_at": datetime.now(),
-            "updated_at": datetime.now()
-        })
-        return id
+    async def create(self, user: ApiUserCreate) -> None:
+        new_user = UserDb(name=user.name, email=user.email,
+                          memo=user.memo, image=user.image)
+        self.db_session.add(new_user)
+        await self.db_session.flush()
