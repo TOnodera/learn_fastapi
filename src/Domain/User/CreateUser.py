@@ -1,10 +1,10 @@
-from route.user import UserCreate
+from route.user import ApiUserCreate
 from Domain.Repository.User import User as UserRepository
 
 
 class CreateUser:
 
-    def __init__(self, user: UserCreate):
+    def __init__(self, user: ApiUserCreate):
         self.user = user
         self.repository = UserRepository()
 

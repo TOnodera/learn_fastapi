@@ -12,7 +12,7 @@ class UserSelect(BaseModel):
     updated_at: datetime
 
 
-class UserCreate(BaseModel):
+class ApiUserCreate(BaseModel):
     name: str
     email: str
     memo: str

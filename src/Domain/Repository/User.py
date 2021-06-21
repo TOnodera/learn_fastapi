@@ -1,6 +1,6 @@
 from database.models import User as UserModel
 from Domain.Repository.Repository import Repository
-from route.user import UserCreate
+from route.user import ApiUserCreate
 
 
 class User(Repository):
@@ -11,7 +11,7 @@ class User(Repository):
     def all(self):
         return self.connection.query(UserModel).all()
 
-    def create(self, user: UserCreate):
+    def create(self, user: ApiUserCreate):
         orm = UserModel()
         orm.name = user.name
         orm.email = user.email

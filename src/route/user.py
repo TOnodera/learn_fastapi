@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from typing import List
-from .apischema import UserSelect, UserCreate
+from .apischema import UserSelect, ApiUserCreate
 from database.models import User
 from Domain.User.User import User as UserDomain
 from Domain.Exception.DomainException import DomainException
@@ -16,7 +16,7 @@ def all():
 
 
 @router.post('/users/create', response_model=UserSelect)
-def create(user: UserCreate):
+def create(user: ApiUserCreate):
     try:
         id = domain.create(user)
         orm = User()
