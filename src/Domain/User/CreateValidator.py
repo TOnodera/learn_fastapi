@@ -1,5 +1,5 @@
 from Domain.Exception.DomainException import DomainException
-from route.user import UserCreate
+from route.user import ApiUserCreate
 from .UserValidator import UserValidator
 import re
 
@@ -7,7 +7,7 @@ import re
 class CreateValidator(UserValidator):
 
     @classmethod
-    def validate(cls, user: UserCreate):
+    def validate(cls, user: ApiUserCreate):
 
         if len(user.name) < cls.userNameMinSize:
             raise DomainException(
