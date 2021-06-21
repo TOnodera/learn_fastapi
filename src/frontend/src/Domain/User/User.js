@@ -2,10 +2,11 @@ import http from '@/Domain/Utility/http';
 import UserCreate from './UserCreate';
 
 class User {
-  async create(name, email) {
-    const creator = new UserCreate(name, email);
+  async create(user) {
+    const creator = new UserCreate(user);
     await creator.create();
   }
+  async update() {}
   async all() {
     const response = await http.get('/users');
     return response.data;

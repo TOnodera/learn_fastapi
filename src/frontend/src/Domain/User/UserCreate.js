@@ -1,9 +1,8 @@
 import http from '@/Domain/Utility/http';
 
 class UserCreate {
-  constructor(name, email) {
-    this.name = name;
-    this.email = email;
+  constructor(user) {
+    this.user = user;
   }
 
   validate() {
@@ -14,11 +13,14 @@ class UserCreate {
     if (!this.validate()) {
       return;
     }
+
     const response = await http.post('/users/create', {
-      name: this.name,
-      email: this.email,
+      name: this.user.name,
+      email: this.user.email,
+      memo: this.user.memo,
+      image: this.user.image,
     });
-    console.log(response);
+    return response.data;
   }
 }
 
