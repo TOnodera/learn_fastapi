@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from typing import List
-from .schema import UserSelect, UserCreate
+from .apischema import UserSelect, UserCreate
 from database.models import User
 from Domain.User.User import User as UserDomain
 from Domain.Exception.DomainException import DomainException
