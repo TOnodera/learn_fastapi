@@ -1,9 +1,8 @@
-import sqlalchemy
-import databases
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import declarative_base, sessionmaker
 import os
-import datetime
 
-DATABASE_URL = 'mysql://%s:%s@%s:%s/%s?charset=utf8' % (
+DATABASE_URL = 'mysql+aiomysql://%s:%s@%s:%s/%s?charset=utf8' % (
     os.environ['MYSQL_USER'],
     os.environ['MYSQL_PASSWORD'],
     'mysql',
@@ -11,37 +10,7 @@ DATABASE_URL = 'mysql://%s:%s@%s:%s/%s?charset=utf8' % (
     os.environ['MYSQL_DATABASE']
 )
 
-database = databases.Database(DATABASE_URL)
-metadata = sqlalchemy.MetaData()
-
-
-users = sqlalchemy.Table(
-    "users",
-    metadata,
-    sqlalchemy.Column('id', sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column('name', sqlalchemy.String(255)),
-    sqlalchemy.Column('email', sqlalchemy.String(255)),
-    sqlalchemy.Column('image', sqlalchemy.String(255)),
-    sqlalchemy.Column('memo', sqlalchemy.Text),
-    sqlalchemy.Column('created_at', sqlalchemy.DateTime,
-                      default=datetime.datetime.now),
-    sqlalchemy.Column('updated_at', sqlalchemy.DateTime,
-                      default=datetime.datetime.now)
-)
-
-articles = sqlalchemy.Table(
-    'articles',
-    metadata,
-    sqlalchemy.Column('id', sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column('title', sqlalchemy.String(255)),
-    sqlalchemy.Column('body', sqlalchemy.Text),
-    sqlalchemy.Column('created_at', sqlalchemy.DateTime,
-                      default=datetime.datetime.now),
-    sqlalchemy.Column('updated_at', sqlalchemy.DateTime,
-                      default=datetime.datetime.now)
-)
-
-
-ENGINE = sqlalchemy.create_engine(DATABASE_URL)
-metadata.drop_all(ENGINE)
-metadata.create_all(ENGINE)
+engine = create_async_engine(DATABASE_URL, future=True, echo=True)
+async_session = sessionmaker(
+    engine, expire_on_commit=False, class_=AsyncSession)
+Base = declarative_base()
