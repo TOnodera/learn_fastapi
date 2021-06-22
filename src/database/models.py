@@ -13,6 +13,9 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.datetime.now)
     updated_at = Column(DateTime, default=datetime.datetime.now)
 
+    class Config:
+        orm_mode = True
+
 
 class Article(Base):
     __tablename__ = 'articles'
@@ -22,3 +25,6 @@ class Article(Base):
     image = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.now)
     updated_at = Column(DateTime, default=datetime.datetime.now)
+
+    class Config:
+        orm_mode = True

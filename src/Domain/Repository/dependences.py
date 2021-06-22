@@ -1,5 +1,5 @@
 from database.dbschema import async_session
-from Domain.Repository.User import User
+from Domain.User.User import User
 
 
 async def get_user():

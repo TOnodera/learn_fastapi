@@ -21,14 +21,13 @@ async def get(user_id: int, domain: UserDomain = Depends(get_user)):
 
 
 @router.put('/users/{user_id}', response_model=ApiUserSelect)
-def update(user: ApiUserUpdate, domain: UserDomain = Depends(get_user)):
-    print(user)
+async def update(user: ApiUserUpdate, domain: UserDomain = Depends(get_user)):
+    return await domain.update(user)
 
 
 @router.post('/users/create', response_model=ApiUserSelect)
 async def create(user: ApiUserCreate, domain: UserDomain = Depends(get_user)):
     try:
-        id = await domain.create(user)
-
+        return await domain.create(user)
     except DomainException as e:
         ExceptionHandler.handle(e)
