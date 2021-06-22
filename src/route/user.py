@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, File, UploadFile
 from typing import List
 from route.apischema import ApiUserSelect, ApiUserCreate, ApiUserUpdate
 from database.models import User
@@ -6,6 +6,9 @@ from Domain.User.User import User as UserDomain
 from Domain.Exception.DomainException import DomainException
 from Domain.Exception.ExceptionHandler import ExceptionHandler
 from Domain.Repository.dependences import get_user
+import aiofiles
+import config
+import uuid
 
 router = APIRouter()
 
@@ -31,3 +34,13 @@ async def create(user: ApiUserCreate, domain: UserDomain = Depends(get_user)):
         return await domain.create(user)
     except DomainException as e:
         ExceptionHandler.handle(e)
+
+
+@router.post("/users/create/image")
+async def create_image(id: int, file: UploadFile = File(...)):
+
+    ext = file.filename.split(".")[-1]
+    async with aiofiles.open("/home/python/workspace/src/store/"+"USER_"+id+"."+ext, 'wb') as out_file:
+        content = await file.read()
+        await out_file.write(content)
+    return {"result": "OK"}

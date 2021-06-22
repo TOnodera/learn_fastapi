@@ -5,7 +5,7 @@ RUN useradd -u 1000 python -m
 RUN pip install flake8 && pip install autopep8
 
 USER python
-RUN pip install fastapi sqlalchemy==1.4.3 uvicorn jinja2 python-multipart mysqlclient pytest databases aiomysql
+RUN pip install fastapi sqlalchemy==1.4.3 uvicorn jinja2 python-multipart mysqlclient pytest databases aiomysql aiofiles
 ENV PATH $PATH:/home/python/.local/bin
 USER root
 
