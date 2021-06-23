@@ -1,1 +1,1 @@
-test b add b
+test b add b c
